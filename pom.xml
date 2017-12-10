@@ -132,12 +132,6 @@
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>3.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
 
         <!-- 加入servlet和jsp的依赖 -->
         <dependency>
