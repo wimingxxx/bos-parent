@@ -9,8 +9,13 @@
     <artifactId>bos-web</artifactId>
     <packaging>war</packaging>
     <name>bos-web Maven Webapp</name>
-    <url>http://maven.apache.org</url>
-    <build>
-        <finalName>bos-web</finalName>
-    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qwm</groupId>
+            <artifactId>bos-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>
