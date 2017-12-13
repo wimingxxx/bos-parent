@@ -23,7 +23,7 @@
 
 [BOS物流项目10———easyui中messager和menubutton基本使用](blog/10.md)
 
-[](blog/11.md)
+[BOS物流项目11———登陆和验证登陆的实现](blog/11.md)
 
 [](blog/12.md)
 

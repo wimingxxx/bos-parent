@@ -62,7 +62,7 @@ public class UserAction extends BaseAction<User>{
      * @return
      */
     public String logout(){
-        ServletActionContext.getRequest().getSession().invalidate();
+        BOSUtils.getSession().invalidate();
         return LOGIN;
     }
 }
