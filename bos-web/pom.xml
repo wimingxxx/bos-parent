@@ -11,9 +11,16 @@
     <name>bos-web Maven Webapp</name>
 
     <dependencies>
+
         <dependency>
             <groupId>com.qwm</groupId>
             <artifactId>bos-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qwm</groupId>
+            <artifactId>bos-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

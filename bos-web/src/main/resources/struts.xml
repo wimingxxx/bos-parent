@@ -6,11 +6,39 @@
 
 <struts>
     <constant name="struts.devMode" value="false"/>
+    <!-- 配置动态方法调用是否开启常量
+              默认是关闭的,需要开启
+   -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
 
     <package name="basicstruts2" extends="struts-default">
+        <interceptors>
+            <!--注册拦截器-->
+            <interceptor name="loginInterceptor" class="com.qwm.bos.web.interceptor.BOSLoginInterceptor">
+                <!--指定哪些方法不需要拦截-->
+                <param name="excludeMethods">login,regist</param>
+            </interceptor>
+            <!--定义拦截器栈-->
+            <interceptor-stack name="myStack" >
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"/>
+
+        <!--全局结果集配置-->
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
+
         <!-- 需要进行权限控制的页面访问 -->
         <action name="page_*_*">
             <result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+        </action>
+
+        <!--用户管理-->
+        <action name="userAction_*" class="userAction" method="{1}">
+            <result name="home">/index.jsp</result>
         </action>
     </package>
 </struts>
