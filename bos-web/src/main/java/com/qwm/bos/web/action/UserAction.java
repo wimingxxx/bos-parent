@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import java.io.IOException;
+
 /**
  * @author: qiwenming(杞文明)
  * @date: 17/12/11 下午10:13
@@ -64,5 +66,25 @@ public class UserAction extends BaseAction<User>{
     public String logout(){
         BOSUtils.getSession().invalidate();
         return LOGIN;
+    }
+
+    /**
+     * 修改密码
+     * @return
+     * @throws IOException
+     */
+    public String editPassword() throws IOException {
+        String str = "1";
+        //获取当前登录用户
+        User user = BOSUtils.getLoginUser();
+        try {
+            userService.editPassword(user.getId(),model.getPassword());
+        }catch (Exception e){
+            str = "0";
+            e.printStackTrace();
+        }
+        ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+        ServletActionContext.getResponse().getWriter().print(str);
+        return NONE;
     }
 }

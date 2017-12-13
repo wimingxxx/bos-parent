@@ -79,13 +79,36 @@
 			});
 		},3000);
 		/*************/
-		
+
 		$("#btnCancel").click(function(){
 			$('#editPwdWindow').window('close');
 		});
-		
+
+		//为确定按钮绑定事件
 		$("#btnEp").click(function(){
-			alert("修改密码");
+			//进行表单校验
+			var v = $("#editPasswordForm").form("validate");
+			if(v){
+				//表单校验通过，手动校验两次输入是否一致
+				var v1 = $("#txtNewPass").val();
+				var v2 = $("#txtRePass").val();
+				if(v1 == v2){
+					//两次输入一致，发送ajax请求
+					$.post("userAction_editPassword.action",{"password":v1},function(data){
+						if(data == '1'){
+							//修改成功，关闭修改密码窗口
+							$("#editPwdWindow").window("close");
+							$.messager.alert("提示信息","密码修成功！","info");
+						}else{
+							//修改密码失败，弹出提示
+							$.messager.alert("提示信息","密码修改失败！","error");
+						}
+					});
+				}else{
+					//两次输入不一致，弹出错误提示
+					$.messager.alert("提示信息","两次密码输入不一致！","warning");
+				}
+			}
 		});
 	});
 
@@ -142,7 +165,7 @@
 		$.messager
 		.confirm('系统提示','您确定要退出本次登录吗?',function(isConfirm) {
 			if (isConfirm) {
-				location.href = '${pageContext.request.contextPath }/login.jsp';
+				location.href = '${pageContext.request.contextPath }/userAction_logout.action';
 			}
 		});
 	}
@@ -211,7 +234,7 @@
 				<tr>
 					<td style="width: 300px;">
 						<div style="color: #999; font-size: 8pt;">
-							传智播客 | Powered by <a href="http://www.itcast.cn/">itcast.cn</a>
+
 						</div>
 					</td>
 					<td style="width: *;" class="co1"><span id="online"

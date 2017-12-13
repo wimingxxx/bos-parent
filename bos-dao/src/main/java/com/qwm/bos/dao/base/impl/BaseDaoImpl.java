@@ -1,6 +1,8 @@
 package com.qwm.bos.dao.base.impl;
 
 import com.qwm.bos.dao.base.IBaseDao;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -57,5 +59,22 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     public List<T> findAll() {
         String hql = "FROM "+entityClass.getSimpleName();
         return (List<T>)getHibernateTemplate().find(hql);
+    }
+
+    /**
+     * 执行更新
+     * @param queryName
+     * @param objects
+     */
+    @Override
+    public void executeUpdate(String queryName, Object... objects) {
+        Session session = getSessionFactory().getCurrentSession();
+        Query query = session.getNamedQuery(queryName);
+        for (int i = 0; i < objects.length; i++) {
+            //为HQL语句中 ? 赋值
+            query.setParameter(i,objects[i]);
+        }
+        //执行更新
+        query.executeUpdate();
     }
 }

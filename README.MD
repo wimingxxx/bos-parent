@@ -25,7 +25,7 @@
 
 [BOS物流项目11———登陆和验证登陆的实现](blog/11.md)
 
-[](blog/12.md)
+[BOS物流项目12———easyui弹框修改密码](blog/12.md)
 
 [](blog/13.md)
 
