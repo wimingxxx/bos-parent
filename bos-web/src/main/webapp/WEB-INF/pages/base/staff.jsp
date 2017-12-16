@@ -35,13 +35,57 @@
 	function doView(){
 		alert("查看...");
 	}
-	
+
 	function doDelete(){
-		alert("删除...");
+		//获取数据表格中所有选中的行，返回数组对象
+		var rows = $("#grid").datagrid("getSelections");
+		if(rows.length == 0){
+			//没有选中记录，弹出提示
+			$.messager.alert("提示信息","请选择需要删除的取派员！","warning");
+		}else{
+			//选中了取派员,弹出确认框
+			$.messager.confirm("删除确认","你确定要删除选中的取派员吗？",function(r){
+				if(r){
+
+					var array = new Array();
+					//确定,发送请求
+					//获取所有选中的取派员的id
+					for(var i=0;i<rows.length;i++){
+						var staff = rows[i];//json对象
+						var id = staff.id;
+						array.push(id);
+					}
+					var ids = array.join(",");//1,2,3,4,5
+					location.href = "staffAction_deleteBatch.action?ids="+ids;
+				}
+			});
+		}
 	}
 	
 	function doRestore(){
-		alert("将取派员还原...");
+		//获取数据表格中所有选中的行，返回数组对象
+		var rows = $("#grid").datagrid("getSelections");
+		if(rows.length == 0){
+			//没有选中记录，弹出提示
+			$.messager.alert("提示信息","请选择需要还原的取派员！","warning");
+		}else{
+			//选中了取派员,弹出确认框
+			$.messager.confirm("还原确认","你确定要还原选中的取派员吗？",function(r){
+				if(r){
+
+					var array = new Array();
+					//确定,发送请求
+					//获取所有选中的取派员的id
+					for(var i=0;i<rows.length;i++){
+						var staff = rows[i];//json对象
+						var id = staff.id;
+						array.push(id);
+					}
+					var ids = array.join(",");//1,2,3,4,5
+					location.href = "staffAction_reductionBatch.action?ids="+ids;
+				}
+			});
+		}
 	}
 	//工具栏
 	var toolbar = [ {
@@ -126,10 +170,10 @@
 			border : false,
 			rownumbers : true,
 			striped : true,
-			pageList: [30,50,100],
+			pageList: [10,15,20],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/staff.json",
+			url : "staffAction_pageQuery.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -145,11 +189,50 @@
 	        height: 400,
 	        resizable:false
 	    });
-		
+
+		// 修改取派员窗口
+		$('#editStaffWindow').window({
+			title: '修改取派员',
+			width: 400,
+			modal: true,
+			shadow: true,
+			closed: true,
+			height: 400,
+			resizable:false
+		});
+
+
+		var reg= /^1[3|4|5|7|8][\d]{9}$/;
+		$.extend($.fn.validatebox.defaults.rules,{
+			telephone:{
+				validator:function(value,param){
+					return reg.test(value);
+				},
+				message:'手机输入有误'
+			}
+		});
+
+		$('#save').click(function(){
+			//保存表单验证是否通过
+			var v = $('#addStaffFrom').form('validate');
+			if(v){
+				$('#addStaffFrom').submit();
+			}
+		});
+
+		//为保存按钮绑定事件
+		$("#edit").click(function(){
+			//表单校验，如果通过，提交表单
+			var v = $("#editStaffForm").form("validate");
+			if(v){
+				$("#editStaffForm").submit();
+			}
+		});
 	});
 
 	function doDblClickRow(rowIndex, rowData){
-		alert("双击表格数据...");
+		$("#editStaffWindow").window("open");
+		$("#editStaffForm").form("load",rowData);
 	}
 </script>	
 </head>
@@ -165,23 +248,19 @@
 		</div>
 		
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="addStaffFrom" action="staffAction_add.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">收派员信息</td>
 					</tr>
 					<!-- TODO 这里完善收派员添加 table -->
 					<tr>
-						<td>取派员编号</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
-					<tr>
 						<td>姓名</td>
 						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>手机</td>
-						<td><input type="text" name="telephone" class="easyui-validatebox" required="true"/></td>
+						<td><input type="text" data-options="validType:'telephone'" name="telephone" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>单位</td>
@@ -202,5 +281,52 @@
 			</form>
 		</div>
 	</div>
+
+
+	<!-- 修改取派员窗口 -->
+	<div class="easyui-window" title="对收派员进行添加或者修改" id="editStaffWindow" collapsible="false"
+		 minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
+			<div class="datagrid-toolbar">
+				<a id="edit" icon="icon-edit" href="#" class="easyui-linkbutton" plain="true" >保存</a>
+			</div>
+		</div>
+
+		<div region="center" style="overflow:auto;padding:5px;" border="false">
+			<form id="editStaffForm" action="staffAction_edit.action" method="post">
+				<input type="hidden" name="id">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">收派员信息</td>
+					</tr>
+					<!-- TODO 这里完善收派员添加 table -->
+					<tr>
+						<td>姓名</td>
+						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>手机</td>
+						<td><input type="text" data-options="validType:'telephone'" name="telephone" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>单位</td>
+						<td><input type="text" name="station" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="checkbox" name="haspda" value="1" />
+							是否有PDA</td>
+					</tr>
+					<tr>
+						<td>取派标准</td>
+						<td>
+							<input type="text" name="standard" class="easyui-validatebox" required="true"/>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
 </body>
 </html>	
