@@ -232,6 +232,7 @@
 
 	function doDblClickRow(rowIndex, rowData){
 		$("#editStaffWindow").window("open");
+		//把数据自动显示到form表单中,通过name来识别
 		$("#editStaffForm").form("load",rowData);
 	}
 </script>	
