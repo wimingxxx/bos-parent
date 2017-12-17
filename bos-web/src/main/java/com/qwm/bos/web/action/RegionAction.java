@@ -2,7 +2,9 @@ package com.qwm.bos.web.action;
 
 import com.qwm.bos.domain.Region;
 import com.qwm.bos.service.IRegionService;
+import com.qwm.bos.utils.PinYin4jUtils;
 import com.qwm.bos.web.action.base.BaseAction;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -56,6 +58,21 @@ public class RegionAction extends BaseAction<Region> {
 
             //创建区域对象
             Region region = new Region(id,province,city,district,postcode,null,null,null);
+
+           //去掉省市区
+            province = province.substring(0,province.length()-1);
+            city = city.substring(0,city.length()-1);
+            district = district.substring(0,district.length()-1);
+            String info = province + city + district;
+            //简码
+            String[] headByString = PinYin4jUtils.getHeadByString(info);
+            //获取简码
+            String shortcode = StringUtils.join(headByString);
+            //城市编码
+            String citycode = PinYin4jUtils.hanziToPinyin(city,"");
+            //设置简码和城市编码
+            region.setShortcode(shortcode);
+            region.setCitycode(citycode);
             regionList.add(region);
         }
         //现在我们把读取的数据插入到数据库中

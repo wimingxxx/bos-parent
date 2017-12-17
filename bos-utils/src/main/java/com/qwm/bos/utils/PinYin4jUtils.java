@@ -1,4 +1,4 @@
-package com.itheima.bos.utils;
+package com.qwm.bos.utils;
 
 import java.util.Arrays;
 
