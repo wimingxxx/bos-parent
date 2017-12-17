@@ -49,5 +49,10 @@
         <!--区域管理-->
         <action name="regionAction_*" class="regionAction" method="{1}">
         </action>
+
+        <!-- 分区管理 -->
+        <action name="subareaAction_*" class="subareaAction" method="{1}">
+            <result name="list">/WEB-INF/pages/base/subarea.jsp</result>
+        </action>
     </package>
 </struts>

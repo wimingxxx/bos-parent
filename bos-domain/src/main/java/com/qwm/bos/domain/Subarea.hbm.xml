@@ -10,7 +10,7 @@
         <many-to-one name="decidedzone" class="com.qwm.bos.domain.Decidedzone" fetch="select">
             <column name="decidedzone_id" length="32" />
         </many-to-one>
-        <many-to-one name="region" class="com.qwm.bos.domain.Region" fetch="select">
+        <many-to-one lazy="false" name="region" class="com.qwm.bos.domain.Region" fetch="select">
             <column name="region_id" length="32" />
         </many-to-one>
         <property name="addresskey" type="java.lang.String">

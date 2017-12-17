@@ -91,8 +91,31 @@ public class RegionAction extends BaseAction<Region> {
      */
     public String pageQuery() throws Exception{
         regionService.pageQuery(pageBean);
-        java2Json(pageBean,new String[]{"currentPage","detachedCriteria","pageSize"});
+        java2Json(pageBean,new String[]{"currentPage","detachedCriteria","pageSize","subareas"});
         return NONE;
     }
 
+    //区域下拉搜索的参数,使用属性驱动
+    private String q;
+
+    /**
+     * 区域下拉搜索
+     * @return
+     */
+    public String listajax(){
+        List<Region> list = null;
+        //判断,如果搜索的参数不为空,我们使用搜索的方法
+        //如果为空,我们使用查询全部的方法
+        if(StringUtils.isNotBlank(q)){
+            list = regionService.findByQ(q);
+        }else{
+            list = regionService.findAll();
+        }
+        java2Json(list,new String[]{"subareas"});
+        return NONE;
+    }
+
+    public void setQ(String q) {
+        this.q = q;
+    }
 }

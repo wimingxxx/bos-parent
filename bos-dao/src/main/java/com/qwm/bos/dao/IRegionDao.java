@@ -3,6 +3,8 @@ package com.qwm.bos.dao;
 import com.qwm.bos.dao.base.IBaseDao;
 import com.qwm.bos.domain.Region;
 
+import java.util.List;
+
 /**
  * @author: qiwenming(杞文明)
  * @date: 17/12/17 下午1:02
@@ -10,4 +12,5 @@ import com.qwm.bos.domain.Region;
  * @description:
  */
 public interface IRegionDao extends IBaseDao<Region> {
+    List<Region> findByQ(String q);
 }
