@@ -105,5 +105,14 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
         pageBean.setRows(rows);
     }
 
+    /**
+     * 保存或者更新
+     * @param entity
+     */
+    @Override
+    public void saveOrUpdate(T entity) {
+        getHibernateTemplate().saveOrUpdate(entity);
+    }
+
 
 }
