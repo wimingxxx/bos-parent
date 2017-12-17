@@ -84,4 +84,15 @@ public class RegionAction extends BaseAction<Region> {
         this.regionFile = regionFile;
     }
 
+    /**
+     * 分页查询
+     * @return
+     * @throws Exception
+     */
+    public String pageQuery() throws Exception{
+        regionService.pageQuery(pageBean);
+        java2Json(pageBean,new String[]{"currentPage","detachedCriteria","pageSize"});
+        return NONE;
+    }
+
 }

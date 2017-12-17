@@ -3,6 +3,7 @@ package com.qwm.bos.service.impl;
 import com.qwm.bos.dao.IRegionDao;
 import com.qwm.bos.domain.Region;
 import com.qwm.bos.service.IRegionService;
+import com.qwm.bos.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +35,10 @@ public class RegionServiceImpl implements IRegionService {
         for (Region region:regionList) {
             regionDao.saveOrUpdate(region);
         }
+    }
+
+    @Override
+    public void pageQuery(PageBean pageBean) {
+        regionDao.pageQuery(pageBean);
     }
 }

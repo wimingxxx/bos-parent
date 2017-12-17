@@ -1,6 +1,7 @@
 package com.qwm.bos.service;
 
 import com.qwm.bos.domain.Region;
+import com.qwm.bos.utils.PageBean;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ import java.util.List;
  */
 public interface IRegionService {
     void saveBatch(List<Region> regionList);
+
+    void pageQuery(PageBean pageBean);
 }
