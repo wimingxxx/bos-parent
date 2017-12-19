@@ -1,6 +1,7 @@
 package com.qwm.bos.service;
 
 import com.qwm.bos.domain.Decidedzone;
+import com.qwm.bos.utils.PageBean;
 
 /**
  * @author: qiwenming(杞文明)
@@ -10,4 +11,6 @@ import com.qwm.bos.domain.Decidedzone;
  */
 public interface IDecidedzoneService {
     void save(Decidedzone model, String[] subareaid);
+
+    void pageQuery(PageBean pageBean);
 }

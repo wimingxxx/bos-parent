@@ -5,6 +5,7 @@ import com.qwm.bos.dao.ISubareaDao;
 import com.qwm.bos.domain.Decidedzone;
 import com.qwm.bos.domain.Subarea;
 import com.qwm.bos.service.IDecidedzoneService;
+import com.qwm.bos.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +38,10 @@ public class DecidedzoneServiceImpl implements IDecidedzoneService{
             //一方（定区）已经放弃维护外键权利，只能由多方（分区）负责维护
             subarea.setDecidedzone(model);
         }
+    }
+
+    @Override
+    public void pageQuery(PageBean pageBean) {
+        decidedzoneDao.pageQuery(pageBean);
     }
 }

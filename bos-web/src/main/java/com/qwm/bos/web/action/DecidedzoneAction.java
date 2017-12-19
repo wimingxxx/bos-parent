@@ -32,4 +32,13 @@ public class DecidedzoneAction extends BaseAction<Decidedzone>{
         decidedzoneService.save(model,subareaid);
         return LIST;
     }
+
+    public String pageQuery(){
+        decidedzoneService.pageQuery(pageBean);
+        java2Json(pageBean,new String[]{
+                "currentPage","detachedCriteria",
+                "pageSize","subareas","decidedzones"
+        });
+        return NONE;
+    }
 }
