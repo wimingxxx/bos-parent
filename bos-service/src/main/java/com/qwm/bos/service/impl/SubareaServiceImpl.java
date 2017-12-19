@@ -4,6 +4,8 @@ import com.qwm.bos.dao.ISubareaDao;
 import com.qwm.bos.domain.Subarea;
 import com.qwm.bos.service.ISubareaService;
 import com.qwm.bos.utils.PageBean;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +37,12 @@ public class SubareaServiceImpl implements ISubareaService{
     @Override
     public List<Subarea> findAll() {
         return subareaDao.findAll();
+    }
+
+    @Override
+    public List<Subarea> findListNotAssociation() {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Subarea.class);
+        detachedCriteria.add(Restrictions.isNull("decidedzone"));
+        return subareaDao.findByCriteria(detachedCriteria);
     }
 }

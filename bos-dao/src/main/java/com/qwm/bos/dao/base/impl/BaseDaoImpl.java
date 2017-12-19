@@ -115,5 +115,10 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
         getHibernateTemplate().saveOrUpdate(entity);
     }
 
+    @Override
+    public List<T> findByCriteria(DetachedCriteria detachedCriteria) {
+        return (List<T>) getHibernateTemplate().findByCriteria(detachedCriteria);
+    }
+
 
 }

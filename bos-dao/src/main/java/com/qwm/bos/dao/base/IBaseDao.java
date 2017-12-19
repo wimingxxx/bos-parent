@@ -1,6 +1,7 @@
 package com.qwm.bos.dao.base;
 
 import com.qwm.bos.utils.PageBean;
+import org.hibernate.criterion.DetachedCriteria;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,4 +22,5 @@ public interface IBaseDao<T> {
     public void executeUpdate(String queryName,Object... objects);
     public void pageQuery(PageBean pageBean);
     public void saveOrUpdate(T entity);
+    List<T> findByCriteria(DetachedCriteria detachedCriteria);
 }

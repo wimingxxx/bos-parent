@@ -3,6 +3,8 @@ package com.qwm.bos.service;
 import com.qwm.bos.domain.Staff;
 import com.qwm.bos.utils.PageBean;
 
+import java.util.List;
+
 /**
  * @author: qiwenming(杞文明)
  * @date: 17/12/14 下午11:09
@@ -21,4 +23,6 @@ public interface IStaffService {
     Staff findById(String id);
 
     void update(Staff staff);
+
+    List<Staff> findListNotDelete();
 }

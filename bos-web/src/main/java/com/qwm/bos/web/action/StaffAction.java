@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author: qiwenming(杞文明)
@@ -76,5 +77,16 @@ public class StaffAction extends BaseAction<Staff> {
 
     public void setIds(String ids) {
         this.ids = ids;
+    }
+
+
+    /**
+     * 获取所有未删除的取派员
+     * @return
+     */
+    public String listajax(){
+        List<Staff> list = staffService.findListNotDelete();
+        java2Json(list,new String[]{"decidedzones"});
+        return NONE;
     }
 }
