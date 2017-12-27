@@ -63,19 +63,19 @@
 
 [BOS物流项目30———定区数据2\_定区分页查询以及死循环解决](blog/30.md)
 
-[](blog/31.md)
+[BOS物流项目31———WebService01_WebService入门](blog/31.md)
 
-[](blog/32.md)
+[BOS物流项目32———WebService02_发布一个WS服务](blog/32.md)
 
-[](blog/33.md)
+[BOS物流项目33———WebService03_CXF](blog/33.md)
 
-[](blog/34.md)
+[BOS物流项目34———WebService04_基于CXF的crm服务](blog/34.md)
 
-[](blog/35.md)
+[BOS物流项目35———定区数据3\_定区关联客户](blog/35.md)
 
-[](blog/36.md)
+[BOS物流项目36———定区数据4\_查看定区中包含的分区和客户信息](blog/36.md)
 
-[](blog/37.md)
+[BOS物流项目37———业务受理1\_自动分单](blog/37.md)
 
 [](blog/38.md)
 
