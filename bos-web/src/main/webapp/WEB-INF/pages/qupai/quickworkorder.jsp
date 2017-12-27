@@ -165,6 +165,11 @@
 			onAfterEdit : function(rowIndex, rowData, changes){
 				console.info(rowData);
 				editIndex = undefined;
+				$.post('workordermanageAction_add.action',rowData,function(data){
+					if(data == '0'){
+						$.messager.alert("提示信息","工作单信息录入失败！","error");
+					}
+				});
 			}
 		});
 	});
