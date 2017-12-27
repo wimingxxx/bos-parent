@@ -4,8 +4,14 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:soap="http://cxf.apache.org/bindings/soap"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://cxf.apache.org/bindings/soap
+					    http://cxf.apache.org/schemas/configuration/soap.xsd
+					    http://cxf.apache.org/jaxws
+					    http://cxf.apache.org/schemas/jaxws.xsd
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/aop
@@ -56,4 +62,10 @@
     <context:annotation-config/>
 
     <tx:annotation-driven/>
+
+    <!-- 注册crm客户端代理对象 -->
+    <jaxws:client id="crmClient"
+                  serviceClass="com.qwm.bos.utils.ICustomerService"
+                  address="http://localhost:8081/crm/service/customer"/>
+
 </beans>
