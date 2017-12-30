@@ -12,19 +12,19 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
 
     <package name="basicstruts2" extends="struts-default">
-        <interceptors>
-            <!--注册拦截器-->
+<!--        <interceptors>
+            &lt;!&ndash;注册拦截器&ndash;&gt;
             <interceptor name="loginInterceptor" class="com.qwm.bos.web.interceptor.BOSLoginInterceptor">
-                <!--指定哪些方法不需要拦截-->
+                &lt;!&ndash;指定哪些方法不需要拦截&ndash;&gt;
                 <param name="excludeMethods">login,regist</param>
             </interceptor>
-            <!--定义拦截器栈-->
+            &lt;!&ndash;定义拦截器栈&ndash;&gt;
             <interceptor-stack name="myStack" >
                 <interceptor-ref name="loginInterceptor"/>
                 <interceptor-ref name="defaultStack"/>
             </interceptor-stack>
         </interceptors>
-        <default-interceptor-ref name="myStack"/>
+        <default-interceptor-ref name="myStack"/>-->
 
         <!--全局结果集配置-->
         <global-results>
