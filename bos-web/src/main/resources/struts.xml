@@ -29,7 +29,14 @@
         <!--全局结果集配置-->
         <global-results>
             <result name="login">/login.jsp</result>
+            <result name="unauthorized">/unauthorized.jsp</result>
         </global-results>
+
+        <!--全局异常捕获-->
+        <global-exception-mappings>
+            <!--权限不足-->
+            <exception-mapping exception="org.apache.shiro.authz.UnauthorizedException" result="unauthorized"></exception-mapping>
+        </global-exception-mappings>
 
         <!-- 需要进行权限控制的页面访问 -->
         <action name="page_*_*">

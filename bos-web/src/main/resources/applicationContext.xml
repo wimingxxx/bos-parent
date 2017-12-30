@@ -82,7 +82,7 @@
                 /login.jsp* = anon
                 /validatecode.jsp* = anon
                 /userAction_login.action = anon
-                /page_base_staff.action = perms["staff"]
+                /page_base_staff.action = perms["staff-list"]
                 /* = authc
             </value>
         </property>
@@ -95,4 +95,14 @@
 
     <!--注入自定义realm-->
     <bean id="bosRealm" class="com.qwm.bos.realm.BOSRealm"/>
+
+    <!-- 开启shiro框架注解支持 -->
+    <bean id="defaultAdvisorAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+        <!-- 必须使用cglib方式为Action对象创建代理对象 -->
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+    <!-- 配置shiro框架提供的切面类，用于创建代理对象 -->
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
+
 </beans>

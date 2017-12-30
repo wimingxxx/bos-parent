@@ -81,17 +81,17 @@
 
 [BOS物流项目39———权限控制1\_简单概述](blog/39.md)
 
-[](blog/40.md)
+[BOS物流项目40———权限控制2\_Shiro简介](blog/40.md)
 
-[](blog/41.md)
+[BOS物流项目41———权限控制3\_Shiro四种权限控制之url拦截](blog/41.md)
 
-[](blog/42.md)
+[BOS物流项目42———权限控制4\_Shiro四种权限控制之方法注解](blog/42.md)
 
-[](blog/43.md)
+[BOS物流项目43———权限控制5\_Shiro四种权限控制之页面标签](blog/43.md)
 
-[](blog/44.md)
+[BOS物流项目44———权限控制6\_Shiro四种权限控制之代码级别调用](blog/44.md)
 
-[](blog/45.md)
+[BOS物流项目45———权限控制7\_Shiro四种权限控制之总结](blog/45.md)
 
 [](blog/46.md)
 

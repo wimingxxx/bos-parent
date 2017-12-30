@@ -4,6 +4,7 @@ import com.qwm.bos.dao.IUserDao;
 import com.qwm.bos.domain.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,11 @@ public class BOSRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        //授予staff-list权限
+        info.addStringPermission("staff-list");
+        //TODO 后期需要修改为根据当前登录用户查询数据库，获取实际对应的权限
+
+        return info;
     }
 }
