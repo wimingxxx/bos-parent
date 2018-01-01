@@ -112,4 +112,39 @@
     <!-- 配置shiro框架提供的切面类，用于创建代理对象 -->
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
 
+
+    <!--暂时不要你这个功能-->
+ <!--   &lt;!&ndash;注册自定义作业类&ndash;&gt;
+    <bean id="myJob" class="com.qwm.bos.jobs.MailJob">
+        <property name="smtpServer" value="smtp服务"/>
+        <property name="username" value="您的邮箱号"/>
+        <property name="password" value="您的邮箱密码"/>
+    </bean>
+
+    &lt;!&ndash;配置JobDetail&ndash;&gt;
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        &lt;!&ndash;注入目标对象&ndash;&gt;
+        <property name="targetObject" ref="myJob"/>
+        &lt;!&ndash;注入目标方法&ndash;&gt;
+        <property name="targetMethod" value="execute"/>
+    </bean>
+
+    &lt;!&ndash;配置触发器&ndash;&gt;
+    <bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        &lt;!&ndash;注入任务详情对象&ndash;&gt;
+        <property name="jobDetail" ref="jobDetail"/>
+        &lt;!&ndash;注入cron表达式,通过这个表达式指定触发的时间点&ndash;&gt;
+        <property name="cronExpression" value="0/5 * * * * ?"/>
+    </bean>
+
+    &lt;!&ndash;配置调度工厂&ndash;&gt;
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        &lt;!&ndash;注入触发器&ndash;&gt;
+        <property name="triggers">
+            <list>
+                <ref bean="myTrigger"/>
+            </list>
+        </property>
+    </bean>-->
+
 </beans>
