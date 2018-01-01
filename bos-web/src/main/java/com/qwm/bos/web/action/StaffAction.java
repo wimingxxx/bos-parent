@@ -3,7 +3,6 @@ package com.qwm.bos.web.action;
 import com.qwm.bos.domain.Staff;
 import com.qwm.bos.service.IStaffService;
 import com.qwm.bos.web.action.base.BaseAction;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -47,7 +46,7 @@ public class StaffAction extends BaseAction<Staff> {
     /**
      * 取派员批量删除
      */
-    @RequiresPermissions("staff-delete")
+//    @RequiresPermissions("staff-delete")
     public String deleteBatch(){
 //        Subject subject = SecurityUtils.getSubject();
 //        subject.checkPermission("staff-delete");

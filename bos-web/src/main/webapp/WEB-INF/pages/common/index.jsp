@@ -43,7 +43,7 @@
 		
 		// 基本功能菜单加载
 		$.ajax({
-			url : '${pageContext.request.contextPath}/json/menu.json',
+			url : '${pageContext.request.contextPath}/functionAction_findMenu.action',
 			type : 'POST',
 			dataType : 'text',
 			success : function(data) {

@@ -2,7 +2,9 @@ package com.qwm.bos.service.impl;
 
 import com.qwm.bos.dao.IFunctionDao;
 import com.qwm.bos.domain.Function;
+import com.qwm.bos.domain.User;
 import com.qwm.bos.service.IFunctionService;
+import com.qwm.bos.utils.BOSUtils;
 import com.qwm.bos.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +61,24 @@ public class FunctionServiceImpl implements IFunctionService {
     @Override
     public void pageQuery(PageBean pageBean) {
         functionDao.pageQuery(pageBean);
+    }
+
+    /**
+     * 根据当前登陆人查询对应的菜单数据,返回json
+     *
+     * @return
+     */
+    @Override
+    public List<Function> findMenu() {
+        List<Function> list = null;
+        //获取当前的用户
+        User user = BOSUtils.getLoginUser();
+        if(user.getUsername().equals("admin")){
+            //如果是超级管理员,那么获取所有的菜单
+            list = functionDao.findAllMenu();
+        }else{
+            list = functionDao.findMenuByUserId(user.getId());
+        }
+        return list;
     }
 }

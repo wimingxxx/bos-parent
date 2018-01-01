@@ -29,4 +29,10 @@ public interface IFunctionService  {
      * @param pageBean
      */
     void pageQuery(PageBean pageBean);
+
+    /**
+     * 根据当前登陆人查询对应的菜单数据,返回json
+     * @return
+     */
+    List<Function> findMenu();
 }

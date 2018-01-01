@@ -51,12 +51,11 @@
 		};
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/json/menu.json',
+			url : '${pageContext.request.contextPath}/functionAction_listajax.action',
 			type : 'POST',
-			dataType : 'text',
+			dataType : 'json',
 			success : function(data) {
-				var zNodes = eval("(" + data + ")");
-				$.fn.zTree.init($("#functionTree"), setting, zNodes);
+				$.fn.zTree.init($("#functionTree"), setting, data);
 			},
 			error : function(msg) {
 				alert('树加载异常!');
@@ -67,8 +66,29 @@
 		
 		// 点击保存
 		$('#save').click(function(){
-			location.href='${pageContext.request.contextPath}/page_admin_privilege.action';
+			//表单验证
+			var v = $("#roleForm").form("validate");
+			if(v){
+				//根据zTree的id获取zTree对象
+				var zTreeObj = $.fn.zTree.getZTreeObj("functionTree");
+				//获取选中的节点,返回数组对象
+				var nodes = zTreeObj.getCheckedNodes(true);
+				//组装成数组
+				var array = new Array();
+				for(var i=0; i<nodes.length; i++){
+					var id = nodes[i].id;
+					array.push(id);
+				}
+				//使用逗号分隔数据,拼接成字符串
+				var functionIds = array.join(",");
+				//为隐藏域设置值
+				$("input[name=functionIds]").val(functionIds);
+				console.info(functionIds);
+				//提交
+				$("#roleForm").submit();
+			}
 		});
+
 	});
 </script>	
 </head>
@@ -79,15 +99,16 @@
 			</div>
 		</div>
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form id="roleForm" method="post">
+			<form id="roleForm" method="post" action="roleAction_add.action">
+				<input type="hidden" name="functionIds">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">角色信息</td>
 					</tr>
 					<tr>
-						<td width="200">编号</td>
+						<td width="200">关键字</td>
 						<td>
-							<input type="text" name="id" class="easyui-validatebox" data-options="required:true" />						
+							<input type="text" name="code" class="easyui-validatebox" data-options="required:true" />
 						</td>
 					</tr>
 					<tr>

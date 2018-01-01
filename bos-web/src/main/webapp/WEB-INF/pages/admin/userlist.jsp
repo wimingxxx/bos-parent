@@ -65,7 +65,7 @@
 		rowspan : 2,
 		align : 'center'
 	}, {
-		field : 'birthday',
+		field : 'birthdayString',
 		title : '生日',
 		width : 120,
 		rowspan : 2,
@@ -76,9 +76,14 @@
 	}, {
 		field : 'telephone',
 		title : '电话',
-		width : 800,
+		width : 150,
 		rowspan : 2
-	} ], [ {
+	} ,{
+		field : 'roleNames',
+		title : '对应角色',
+		width : 200,
+		rowspan : 2
+	}], [ {
 		field : 'station',
 		title : '单位',
 		width : 80,
@@ -99,7 +104,9 @@
 			rownumbers : true,
 			striped : true,
 			toolbar : toolbar,
-			url : "json/users.json",
+			url : "userAction_pageQuery.action",
+			pagination:true,
+			fit:true,
 			idField : 'id', 
 			frozenColumns : frozenColumns,
 			columns : columns,
@@ -121,7 +128,6 @@
 	}
 	
 	function doAdd() {
-		alert("添加用户");
 		location.href="${pageContext.request.contextPath}/page_admin_userinfo.action";
 	}
 
