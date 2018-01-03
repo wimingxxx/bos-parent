@@ -21,4 +21,10 @@ public interface ISubareaService {
     List<Subarea> findListNotAssociation();
 
     List<Subarea> findListByDecidedzoneId(String decidedzoneId);
+
+    /**
+     * 查询区域分布图数据
+     * @return
+     */
+    List<Object> findSubareasGroupByProvince();
 }

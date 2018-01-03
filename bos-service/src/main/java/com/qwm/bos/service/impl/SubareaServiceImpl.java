@@ -56,4 +56,14 @@ public class SubareaServiceImpl implements ISubareaService{
         detachedCriteria.add(Restrictions.eq("decidedzone.id",decidedzoneId));
         return subareaDao.findByCriteria(detachedCriteria);
     }
+
+    /**
+     * 查询区域分布图数据
+     *
+     * @return
+     */
+    @Override
+    public List<Object> findSubareasGroupByProvince() {
+        return subareaDao.findSubareasGroupByProvince();
+    }
 }

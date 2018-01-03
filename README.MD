@@ -121,27 +121,16 @@
 
 [BOS物流项目59———quartz4\_定时给取派员发送新单的邮件](blog/59.md)
 
-[](blog/60.md)
+[BOS物流项目60———Highcharts1\_简介](blog/60.md)
 
-[](blog/61.md)
+[BOS物流项目61———Highcharts2\_简单例子](blog/61.md)
 
-[](blog/62.md)
+[BOS物流项目62———Highcharts3\_3D饼状图展示区域分区分布图](blog/62.md)
 
-[](blog/63.md)
+[BOS物流项目63———Linux中安装JDK和Tomcat](blog/63.md)
 
-[](blog/64.md)
 
-[](blog/65.md)
 
-[](blog/66.md)
-
-[](blog/67.md)
-
-[](blog/68.md)
-
-[](blog/69.md)
-
-[](blog/70.md)
 
 ----
 

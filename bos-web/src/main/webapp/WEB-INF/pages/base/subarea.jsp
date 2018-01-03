@@ -26,6 +26,10 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/highcharts/highcharts-3d.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/highcharts/modules/exporting.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/highcharts/plugins/highcharts-zh_CN.js"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addSubareaWindow').window("open");
@@ -46,7 +50,8 @@
 	function doExport(){
 		window.location.href="subareaAction_exportXls.action"
 	}
-	
+
+
 	function doImport(){
 		alert("导入");
 	}
@@ -82,6 +87,11 @@
 		text : '导出',
 		iconCls : 'icon-undo',
 		handler : doExport
+	},{
+		id : 'button-doShowHighcharts',
+		text : '显示区域分布图',
+		iconCls : 'icon-search',
+		handler : doShowHighcharts
 	}];
 	// 定义列
 	var columns = [ [ {
@@ -176,7 +186,16 @@
 	        height: 400,
 	        resizable:false
 	    });
-		
+
+		$('#showSubareaWindow').window({
+			width: 600,
+			modal: true,
+			shadow: true,
+			closed: true,
+			height: 500,
+			resizable:false
+		});
+
 		// 查询分区
 		$('#searchWindow').window({
 	        title: '查询分区',
@@ -218,6 +237,44 @@
 
 	function doDblClickRow(){
 		alert("双击表格数据...");
+	}
+
+	function doShowHighcharts(){
+		$("#showSubareaWindow").window("open");
+		$.post("subareaAction_findSubareasGroupByProvince.action",function(data){
+			$('#container').highcharts({
+				chart: {
+					type: 'pie',
+					options3d: {
+						enabled: true,
+						alpha: 45,
+						beta: 0
+					}
+				},
+				title: {
+					text: '区域分区分布图'
+				},
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						depth: 35,
+						dataLabels: {
+							enabled: true,
+							format: '{point.name}'
+						}
+					}
+				},
+				series: [{
+					type: 'pie',
+					name: '区域分区分布占比',
+					data: data
+				}]
+			});
+		});
 	}
 </script>	
 </head>
@@ -322,6 +379,12 @@
 					</tr>
 				</table>
 			</form>
+		</div>
+	</div>
+
+    <%--区域分区分布图--%>
+	<div class="easyui-window" title="区域分区分布图" id="showSubareaWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div id="container" split="false" border="false">
 		</div>
 	</div>
 </body>

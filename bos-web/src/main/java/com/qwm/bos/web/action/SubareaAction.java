@@ -138,4 +138,15 @@ public class SubareaAction extends BaseAction<Subarea> {
         java2Json(list,new String[]{"decidezone","region"});
         return NONE;
     }
+
+
+    /**
+     * 查询区域分布图数据
+     * @return
+     */
+    public String findSubareasGroupByProvince(){
+        List<Object> list = subareaService.findSubareasGroupByProvince();
+        java2Json(list,new String[]{});
+        return NONE;
+    }
 }
